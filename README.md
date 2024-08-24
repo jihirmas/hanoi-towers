@@ -1,8 +1,6 @@
 # hanoi-towers
 Gestion de proyectos grupo 8
 
-Aquí tienes el contenido completo del `README.md` listo para copiar y pegar:
-
 ```markdown
 # Torre de Hanoi en Python
 
