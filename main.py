@@ -106,6 +106,16 @@ while not done:
                         init_game = True
                         game_over = False
                         break
+                if menu.btn_demo.is_clicked():
+                    game.set_n_discs(3)  # Asumimos que la demo será con 3 discos por defecto
+                    game.sprites_list.remove(game.discs)
+                    game.discs = []
+                    game.positions[2].discs = []
+                    moves_counter = 0
+                    game.draw_discs()
+                    init_game = True
+                    game_over = False
+                    demo_mode = True  # Activar modo demo
         elif event.type == pygame.MOUSEBUTTONUP:
             drag = False
             drop = True
@@ -128,6 +138,12 @@ while not done:
         min_moves = font.render("Minimum of required movements: "+str(game.min_moves), True, color.BLACK)
         screen.blit(player_moves, [20, 80])
         screen.blit(min_moves, [20, 110])
+        
+        if demo_mode:
+            # Aquí se implementa la lógica del demo
+            game.solve_demo(screen)
+            demo_mode = False  # Desactivar demo después de ejecutarlo
+            
         if game_over:
             menu.sprites_list.draw(screen)
             if len(game.positions[2].discs) == game.n_discs:

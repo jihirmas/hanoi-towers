@@ -92,6 +92,13 @@ class MainMenu(ColorConstants):
         self.btn_quit.rect.y = self.SCREEN_HEIGHT/2 - 40
         self.btn_quit.render_text()
         
+        # Agregar opción de "Mostrar demo"
+        self.btn_demo = Button("Show Demo", self.BLACK, 30, 'Calibri', self.GREEN, 150, 30)
+        self.btn_demo.rect.x = 20
+        self.btn_demo.rect.y = 20
+        self.btn_demo.render_text()
+        self.sprites_list.add(self.btn_demo)
+        
         
         
 
@@ -169,3 +176,28 @@ class Game(ColorConstants):
             self.discs.append(disc)
             self.positions[0].discs.append(disc)
         self.sprites_list.add(self.discs)
+        
+    def solve_demo(self, screen):
+        self._solve_recursive(self.n_discs, 0, 2, 1, screen)
+    
+    def _solve_recursive(self, n, source, target, auxiliary, screen):
+        if n > 0:
+            self._solve_recursive(n-1, source, auxiliary, target, screen)
+            self.move_disc(source, target, screen)
+            pygame.time.wait(500)  # Pausa entre movimientos para visualización
+            self._solve_recursive(n-1, auxiliary, target, source, screen)
+
+    def move_disc(self, from_pos, to_pos, screen):
+        disc_to_move = self.positions[from_pos].discs.pop()  # Remover de la posición actual
+        self.positions[to_pos].discs.append(disc_to_move)  # Agregar a la nueva posición
+        new_pos_length = len(self.positions[to_pos].discs)
+        disc_to_move.rect.x = self.positions[to_pos].rect.x - ((self.DISC_WIDTH / (disc_to_move.id + 1) / 2) - (self.DISC_HEIGHT / 2))
+        disc_to_move.rect.y = (self.BOARD_Y - self.DISC_HEIGHT) - (self.DISC_HEIGHT * (new_pos_length - 1))
+        
+        # Limpiar la pantalla antes de dibujar nuevamente
+        screen.fill(self.WHITE)
+        
+        # Redibujar las posiciones y los discos
+        self.pos_sprites_list.draw(screen)
+        self.sprites_list.draw(screen)
+        pygame.display.flip()
