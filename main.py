@@ -60,6 +60,16 @@ while not done:
                     game.discs = []
                     game.draw_discs()
                     game_over = False
+                elif game.btn_return_to_menu.is_clicked():
+                    # Volver al menú principal
+                    game.sprites_list.remove(game.discs)
+                    game.positions[2].discs = []
+                    game.positions[1].discs = []
+                    game.positions[0].discs = []
+                    moves_counter = 0
+                    game.discs = []
+                    init_game = False
+                    game_over = True
                 if not game_over:
                     for i in range(0,game.n_discs):
                         if game.discs[i].is_clicked():

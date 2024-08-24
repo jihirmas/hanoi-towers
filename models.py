@@ -142,6 +142,14 @@ class Game(ColorConstants):
         self.btn_reset.render_text()
         self.sprites_list.add(self.btn_reset)
         
+        # Crear el botón "Volver al Menú"
+        self.btn_return_to_menu = Button("Quit and select discs", self.BLACK, 30, 'Calibri', self.RED, 250, 30)
+        # poner boton en esquina derecha
+        self.btn_return_to_menu.rect.x = SCREEN_WIDTH - self.btn_return_to_menu.width - 20
+        self.btn_return_to_menu.rect.y = 20
+        self.btn_return_to_menu.render_text()
+        self.sprites_list.add(self.btn_return_to_menu)
+        
     # Set discs number and mim movements
     def set_n_discs(self,n_discs):
         self.n_discs = n_discs
