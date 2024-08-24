@@ -61,6 +61,7 @@ while not done:
                     game.discs = []
                     game.draw_discs()
                     game_over = False
+                    demo_mode = False
                 elif game.btn_return_to_menu.is_clicked():
                     # Volver al menú principal
                     game.sprites_list.remove(game.discs)
@@ -71,6 +72,7 @@ while not done:
                     game.discs = []
                     init_game = False
                     game_over = True
+                    demo_mode = False
                 if not game_over:
                     for i in range(0,game.n_discs):
                         if game.discs[i].is_clicked():
@@ -83,6 +85,7 @@ while not done:
                 else:
                     if menu.btn_quit.is_clicked():
                         done = True
+                        demo_mode = False
                     if menu.btn_play_again.is_clicked():
                         game.sprites_list.remove(game.discs)
                         game.positions[2].discs = []
@@ -90,11 +93,13 @@ while not done:
                         game.discs = []
                         game.draw_discs()
                         game_over = False
+                        demo_mode = False
                     if menu.btn_return.is_clicked():
                         menu.sprites_list.remove([menu.btn_play_again,menu.btn_return,menu.btn_quit])
                         menu.sprites_list.add([menu.btn_discs,menu.label])
                         game.sprites_list.remove(game.discs)
                         init_game = False
+                        demo_mode = False
             else:
                 for i in range(0,len(menu.btn_discs)):
                     if menu.btn_discs[i].is_clicked():
@@ -106,6 +111,7 @@ while not done:
                         game.draw_discs()
                         init_game = True
                         game_over = False
+                        demo_mode = False
                         break
                 if menu.btn_demo.is_clicked():
                     game.set_n_discs(4)  # Asumimos que la demo será con 3 discos por defecto
