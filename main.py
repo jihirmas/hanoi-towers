@@ -4,6 +4,7 @@ MG's Tower of Hanoi for Python - Main Module
 import pygame
 import models
 import sys
+import time
 # Define screen constants
 SCREEN_WIDTH = 1300
 SCREEN_HEIGHT = 700
@@ -107,7 +108,7 @@ while not done:
                         game_over = False
                         break
                 if menu.btn_demo.is_clicked():
-                    game.set_n_discs(3)  # Asumimos que la demo será con 3 discos por defecto
+                    game.set_n_discs(4)  # Asumimos que la demo será con 3 discos por defecto
                     game.sprites_list.remove(game.discs)
                     game.discs = []
                     game.positions[2].discs = []

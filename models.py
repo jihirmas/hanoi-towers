@@ -180,7 +180,7 @@ class Game(ColorConstants):
     def solve_demo(self, screen):
         self._solve_recursive(self.n_discs, 0, 2, 1, screen)
     
-    def _solve_recursive(self, n, source, target, auxiliary, screen):
+    def _solve_recursive(self, n, source, target, auxiliary, screen): 
         if n > 0:
             self._solve_recursive(n-1, source, auxiliary, target, screen)
             self.move_disc(source, target, screen)
